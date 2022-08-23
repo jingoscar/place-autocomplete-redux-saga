@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchPlaces, getHistory } from "../../actions/place";
 import PlaceItem from "./placeItem";
 import styles from "../../styles/globalStyles";
+import { Card } from "react-native-elements";
 
 
 
@@ -65,6 +66,7 @@ const searchPage = () => {
 
     return(
         <View style={styles.container}>
+        <Card>
         {showResults ? (
             <SearchBar
                 style={styles.searchBar}
@@ -82,9 +84,12 @@ const searchPage = () => {
             />
         ) : ''}
         <SegmentedControl
-                values={['Search Results', 'History']}
-                tintColor={'#1253bc'}
-                style={{ height: 40, }}
+                values={['Places', 'Recent Search']}
+                tintColor={'#0BAE8B'}
+                style={{ 
+                    height: 40,
+                    borderRadius: 15,
+                 }}
                 onValueChange={() => {
                     setShowResults(!showResults);
                     setShowHistory(!showHistory);
@@ -94,13 +99,16 @@ const searchPage = () => {
                     }
                 }}
             />
+            </Card>
+            <Card>
             {
                 (showResults || search && showHistory == false) ? (
-                    <FlatList
+                    <FlatList 
+                    
                         data={searchResults}
                         ListEmptyComponent={() => (
                             <View style={styles.emptyListMsgContainer}>
-                                <Text style={styles.emptyListMsgText}>There is no matched place.</Text>
+                            <Text style={styles.emptyListMsgText}>Your Searches Will Appear Here.</Text> 
                             </View>
                         )}
                         renderItem={({ item }) => <PlaceItem item={item} type='Results' />}
@@ -122,6 +130,7 @@ const searchPage = () => {
                     />
                 ) : ''
             }
+            </Card>
         </View>
     )
     

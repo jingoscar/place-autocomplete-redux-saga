@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, } from 'react-native';
-import MapView, { Marker } from 'react-native-maps'
+import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 import styles from '../../styles/globalStyles';
 
 const Map = ({ route }) => {
