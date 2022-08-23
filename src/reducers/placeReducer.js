@@ -100,7 +100,12 @@ import {
                 ...state,
                 loadingUpdate: false,
             } 
+        case REMOVE_HISTORY_FAILURE:
+            return{
+                ...state,
+                loadingUpdate: false,
+            } 
         default:
             return state;       
     }
- }
+ };

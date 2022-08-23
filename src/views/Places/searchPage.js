@@ -4,7 +4,7 @@ import { SegmentedControl, SearchBar } from "@ant-design/react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchPlaces, getHistory } from "../../actions/place";
-import PlaceItem from "../Places/placeItem";
+import PlaceItem from "./placeItem";
 import styles from "../../styles/globalStyles";
 
 

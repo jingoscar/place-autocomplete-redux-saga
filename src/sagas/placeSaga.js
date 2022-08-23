@@ -9,13 +9,15 @@ import {
     removeHistorySuccess,
     removeHistoryFailure,
 } from '../actions/place';
-import { call, put } from "redux-saga/effects";
+import { call, put, fork, takeLatest, select } from "redux-saga/effects";
+import api from "../services/api";
 
 function* workerGetPlaceSaga(params){
     try {
-        const response = yield call(api.getPlaces);
+        const response = yield call(api.searchPlace);
         if (response.status === 200) {
             yield put(searchPlacesSuccess(response.data));
+            
         } else {
             if (response) {
                 yield put(searchPlacesFailure(response));
@@ -26,7 +28,7 @@ function* workerGetPlaceSaga(params){
                 yield put(searchPlacesFailure(response.data));
             }
         }
-        console.log(response);
+        
     } catch (error) {
         console.log(error);
     }
@@ -34,7 +36,7 @@ function* workerGetPlaceSaga(params){
 
 function* workerGetHistorySaga(params) {
     try {
-        const response = yield call(searchHistoryApi.getHistory);
+        const response = yield call(api.getHistory);
         if(response.status === 200) {
             yield put(getHistorySuccess(response.data));
         } else {
@@ -62,7 +64,7 @@ function* workerSaveHistorySaga(params) {
         });
 
         if (duplicatedData == '') {
-            const postResponse = yield call(searchHistoryApi.saveHistory, params.payload);
+            const postResponse = yield call(api.saveHistory, params.payload);
             console.log('post response', JSON.stringify(postResponse));
 
             if (postResponse.status === 201) {
@@ -89,7 +91,7 @@ function* workerRemoveHistorySaga(params) {
         
         console.log('new history: ' + JSON.stringify(newHistory));
 
-        yield call(searchHistoryApi.removeHistory, params.payload);
+        yield call(api.removeHistory, params.payload);
 
         yield put(removeHistorySuccess([...newHistory]));
     } catch (error) {

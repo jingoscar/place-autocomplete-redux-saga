@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import List from '../views/Places/places';
+import searchPage from '../views/Places/searchPage';
+import Map from '../views/Map/Map';
 
 const Stack = createStackNavigator();
 
@@ -10,7 +11,8 @@ const AppStack = () => {
         <NavigationContainer>
         {
             <Stack.Navigator>
-            <Stack.Screen name= 'Google Place Search Autocomplete' component={List}/>
+            <Stack.Screen name= 'Google Place Search Autocomplete' component={searchPage}/>
+            <Stack.Screen name= 'Map' component={Map}/>
             </Stack.Navigator>
         }
         </NavigationContainer>

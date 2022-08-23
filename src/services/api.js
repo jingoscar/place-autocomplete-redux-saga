@@ -1,6 +1,6 @@
 import apisauce from 'apisauce';
 
-const create = (baseURL = 'http://62f0860c57311485d13215d2.mockapi.io/') => {
+const create = (baseURL = 'https://62f0860c57311485d13215d2.mockapi.io/') => {
     const api =apisauce.create({
         baseURL,
         headers: {
